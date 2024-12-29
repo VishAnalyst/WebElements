@@ -2,9 +2,11 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Driver;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -232,6 +234,72 @@ public class clickhereupload {
         System.out.println("The screenshot is taken and stored in the File name as: "+fileName);
      System.out.println("THE TEST IS PASSED");
      driver.quit();
+    }
+
+@Test
+
+    public void DropDownSelection() throws IOException {
+    //Initiate the web driver and maximize the same
+    WebDriver driver = new ChromeDriver();
+    driver.get("https://stock.scriptinglogic.in/amol.html");
+    driver.manage().window().maximize();
+
+    //Locate the first drop down and click the same.
+    WebElement dropDownElement = driver.findElement(By.xpath("//select[@id='seltext']"));
+    System.out.println("The Dropdown is found and its selected");
+
+    //initiate select object so that we can select from dropdown.
+    Select dropDown = new Select(dropDownElement);
+
+    //Select various optins from the dropdown and taking creenshot respectively.
+    //Select option 1 from dropdown
+    dropDown.selectByValue("v1");
+    System.out.println("Option 1 is selected");
+        //Taking screenshot as a proof
+        TakesScreenshot objSc1 = (TakesScreenshot) driver;
+        File scrFile1 = objSc1.getScreenshotAs(OutputType.FILE);
+        String timeStamp1 = new SimpleDateFormat("ddMMyyyy_hhmmss").format(new Date());
+        String fileFormat1 = "IMG"+timeStamp1+".png";
+        FileUtils.copyFile(scrFile1, new File("/Users/preethianil/Downloads/Selenium/ScreenShots/"+fileFormat1));
+        System.out.println("The Screenshot for the dropdown option 1 is selected.and the file name is "+ fileFormat1);
+
+    //Select various optins from the dropdown and taking creenshot respectively.
+    //Select option 2 from dropdown
+    dropDown.selectByValue("v2");
+    System.out.println("Option 2 is selected");
+        //Taking screenshot as a proof
+        TakesScreenshot objSc2 = (TakesScreenshot) driver;
+        File scrFile2 = objSc2.getScreenshotAs(OutputType.FILE);
+        String timeStamp2 = new SimpleDateFormat("ddMMyyyy_hhmmss").format(new Date());
+        String fileFormat2 = "IMG"+timeStamp2+".png";
+        FileUtils.copyFile(scrFile2, new File("/Users/preethianil/Downloads/Selenium/ScreenShots/"+fileFormat2));
+        System.out.println("The Screenshot for the dropdown option 2 is selected.and the file name is "+ fileFormat2);
+
+    //Select various optins from the dropdown and taking creenshot respectively.
+    //Select option 3 from dropdown
+    dropDown.selectByIndex(2);
+    System.out.println("Option 3 is selected");
+        //Taking screenshot as a proof
+        TakesScreenshot objSc3 = (TakesScreenshot) driver;
+        File scrFile3 = objSc3.getScreenshotAs(OutputType.FILE);
+        String timeStamp3 = new SimpleDateFormat("ddMMyyyy_hhmmss").format(new Date());
+        String fileFormat3 = "IMG"+timeStamp3+".png";
+        FileUtils.copyFile(scrFile3, new File("/Users/preethianil/Downloads/Selenium/ScreenShots/"+fileFormat3));
+        System.out.println("The Screenshot for the dropdown option 3 is selected. And file name is " + fileFormat3);
+
+    //Select option 4 from dropdown
+    dropDown.selectByIndex(3);
+    System.out.println("Option 3 is selected");
+    //Taking screenshot as a proof
+        TakesScreenshot objSc4 = (TakesScreenshot) driver;
+        File scrFile4 = objSc4.getScreenshotAs(OutputType.FILE);
+        String timeStamp4 = new SimpleDateFormat("ddMMyyyy_hhmmss").format(new Date());
+        String fileFormat4 = "IMG"+timeStamp4+".png";
+        FileUtils.copyFile(scrFile4, new File("/Users/preethianil/Downloads/Selenium/ScreenShots/"+fileFormat4));
+        System.out.println("The Screenshot for the dropdown option 4 is selected. file name is "+ fileFormat4 );
+
+    System.out.println("TEST PASSED: Dropdown selection works fine");
+    driver.quit();
     }
 
 }
