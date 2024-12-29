@@ -302,4 +302,43 @@ public class clickhereupload {
     driver.quit();
     }
 
+@Test
+    public void multipleOptionSelect() throws IOException {
+    //Inintiate the webdriver and call website and maximize it
+    WebDriver driver = new ChromeDriver();
+    driver.get("https://stock.scriptinglogic.in/amol.html");
+    driver.manage().window().maximize();
+
+    //Locate the multielement dropdown.
+    WebElement multiElementOption = driver.findElement(By.xpath("//select[@id='multiSel']"));
+
+    //Now its inside select so need to create select objext
+    Select select = new Select(multiElementOption);
+
+    //Check whether it is a multi element dropdown element.
+    if (select.isMultiple()){
+    //loop through the option and print the texts in the multi dropdown
+    for (WebElement options : select.getOptions()){
+        //Select all options
+        select.selectByVisibleText(options.getText());
+         }
+    }
+    //Verify that all options are selected
+    for (WebElement selectedOption : select.getAllSelectedOptions()){
+        System.out.println("Selected options are"+ selectedOption.getText());
+    }
+    //taking screenshot
+    TakesScreenshot objScn = (TakesScreenshot) driver;
+    File scrFile = objScn.getScreenshotAs(OutputType.FILE);
+    String timeStamp = new SimpleDateFormat("ddMMyyyy_hhmmss").format(new Date());
+    String fileType = "IMG"+timeStamp+".png";
+    FileUtils.copyFile(scrFile, new File("/Users/preethianil/Downloads/Selenium/ScreenShots/"+fileType));
+    System.out.println("The screenshot is taken and the file name is"+fileType);
+
+    System.out.println("TEST IS PASSED");
+
+    driver.quit();
+}
+
+
 }
