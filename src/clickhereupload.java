@@ -181,7 +181,57 @@ public class clickhereupload {
     System.out.println("TEST IS PASSED");
     driver.quit();
     }
+@Test
 
-    //Email field
+    //Radio button
+    public void RadioButton() throws IOException {
+    //Initiate the webdriver and open the website and maximize the same.
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://stock.scriptinglogic.in/amol.html");
+        driver.manage().window().maximize();
+
+        //Button click the radio buttons
+        //locate the radio button and perform click
+        WebElement javaradioButton = driver.findElement(By.xpath("//input[@id='rad0']"));
+        javaradioButton.click();
+        if (javaradioButton.isSelected()) {
+            System.out.println("Java radio button is clicked");
+        }else {
+            System.out.println("Java radio button is not clicked");
+            }
+
+        //Locate selenium radio button and perform click
+        WebElement seleniumradioButton = driver.findElement(By.xpath("//input[@id='rad1']"));
+        seleniumradioButton.click();
+        if (seleniumradioButton.isSelected()){
+            System.out.println("Selenium radio button is clicked");
+        }else {
+            System.out.println("selenium radio button is not clicked");
+        }
+
+        //Locate Cucumber radio button and perform click
+        WebElement cucumberradioButton = driver.findElement(By.xpath("//input[@id='rad2']"));
+        cucumberradioButton.click();
+        if (cucumberradioButton.isSelected()){
+            System.out.println("cucumber radio button is clicked");
+        }else {
+            System.out.println("cucumber radio button is not clicked");
+        }
+
+        //Taking the screenshot of the same.
+        //Initialise the takescreenshot object and assign it to driver and type cast the same
+        TakesScreenshot objScrRb = (TakesScreenshot) driver;
+        //Initialise the method for the object created and pass the output type as a file and determine scrfile
+        File ScrFileRb = objScrRb.getScreenshotAs(OutputType.FILE);
+        //Takeing the current system date of the system and convert it to string format and strore it
+        String timeStampRb = new SimpleDateFormat("ddMMyyyy_hhmmss").format(new Date());
+        //assign the how screenshot file should look like
+        String fileName = "IMG"+timeStampRb+".png";
+        //Now we need to copy the scrfile to the destination location and print that sceenshot is taken
+        FileUtils.copyFile(ScrFileRb, new File("/Users/preethianil/Downloads/Selenium/ScreenShots/"+fileName));
+        System.out.println("The screenshot is taken and stored in the File name as: "+fileName);
+     System.out.println("THE TEST IS PASSED");
+     driver.quit();
+    }
 
 }
